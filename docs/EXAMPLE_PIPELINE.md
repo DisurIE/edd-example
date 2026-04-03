@@ -12,7 +12,7 @@
 
 Основная точка входа:
 
-- [RunOrderDemo.php](/home/disur/projects/edd-example/app/Console/Commands/RunOrderDemo.php)
+- [RunOrderDemo.php](../app/Console/Commands/RunOrderDemo.php)
 
 ## Общая схема
 
@@ -35,11 +35,11 @@
 
 Файл:
 
-- [RunOrderDemo.php](/home/disur/projects/edd-example/app/Console/Commands/RunOrderDemo.php)
+- [RunOrderDemo.php](../app/Console/Commands/RunOrderDemo.php)
 
 Внутри вызывается:
 
-- [CreateOrderHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/CreateOrderHandler.php)
+- [CreateOrderHandler.php](../app/Application/Order/Handlers/CreateOrderHandler.php)
 
 ### Шаг 2. Handler создает агрегат
 
@@ -49,7 +49,7 @@ Handler вызывает:
 
 Файл:
 
-- [Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php)
+- [Order.php](../app/Domain/Order/Order.php)
 
 ### Шаг 3. Агрегат записывает OrderCreated
 
@@ -61,13 +61,13 @@ Handler вызывает:
 
 Событие:
 
-- [OrderCreated.php](/home/disur/projects/edd-example/app/Domain/Order/Events/OrderCreated.php)
+- [OrderCreated.php](../app/Domain/Order/Events/OrderCreated.php)
 
 ### Шаг 4. Handler сохраняет агрегат
 
 Через:
 
-- [DatabaseOrderRepository.php](/home/disur/projects/edd-example/app/Infrastructure/Order/DatabaseOrderRepository.php)
+- [DatabaseOrderRepository.php](../app/Infrastructure/Order/DatabaseOrderRepository.php)
 
 Таблица:
 
@@ -77,19 +77,19 @@ Handler вызывает:
 
 Через:
 
-- [LaravelDomainEventBus.php](/home/disur/projects/edd-example/app/Infrastructure/Events/LaravelDomainEventBus.php)
+- [LaravelDomainEventBus.php](../app/Infrastructure/Events/LaravelDomainEventBus.php)
 
 Что происходит дальше:
 
 - событие сохраняется в `domain_events`
-- вызываются подписчики из [DomainEventHandlerMap.php](/home/disur/projects/edd-example/app/Infrastructure/Events/DomainEventHandlerMap.php)
+- вызываются подписчики из [DomainEventHandlerMap.php](../app/Infrastructure/Events/DomainEventHandlerMap.php)
 
 ### Шаг 6. Projectors строят read-model
 
 Подписчики на `OrderCreated`:
 
-- [OrderDetailsProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderDetailsProjector.php)
-- [OrderListProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderListProjector.php)
+- [OrderDetailsProjector.php](../app/Projections/Order/OrderDetailsProjector.php)
+- [OrderListProjector.php](../app/Projections/Order/OrderListProjector.php)
 
 Таблицы:
 
@@ -102,17 +102,17 @@ Handler вызывает:
 
 Файл:
 
-- [ConfirmOrderHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/ConfirmOrderHandler.php)
+- [ConfirmOrderHandler.php](../app/Application/Order/Handlers/ConfirmOrderHandler.php)
 
 ### Шаг 2. Handler загружает агрегат
 
 Через:
 
-- [DatabaseOrderRepository.php](/home/disur/projects/edd-example/app/Infrastructure/Order/DatabaseOrderRepository.php)
+- [DatabaseOrderRepository.php](../app/Infrastructure/Order/DatabaseOrderRepository.php)
 
 ### Шаг 3. Агрегат выполняет confirm()
 
-Внутри [Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php):
+Внутри [Order.php](../app/Domain/Order/Order.php):
 
 - проверяется, что статус `DRAFT`
 - статус меняется на `CONFIRMED`
@@ -120,7 +120,7 @@ Handler вызывает:
 
 Событие:
 
-- [OrderConfirmed.php](/home/disur/projects/edd-example/app/Domain/Order/Events/OrderConfirmed.php)
+- [OrderConfirmed.php](../app/Domain/Order/Events/OrderConfirmed.php)
 
 ### Шаг 4. Event bus публикует событие
 
@@ -131,9 +131,9 @@ Handler вызывает:
 
 Для `OrderConfirmed` подписаны:
 
-- [OrderDetailsProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderDetailsProjector.php)
-- [OrderListProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderListProjector.php)
-- [RequestSpecialLogisticsHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
+- [OrderDetailsProjector.php](../app/Projections/Order/OrderDetailsProjector.php)
+- [OrderListProjector.php](../app/Projections/Order/OrderListProjector.php)
+- [RequestSpecialLogisticsHandler.php](../app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
 
 ### Шаг 5. Почему для обычного заказа интеграция не срабатывает
 
@@ -161,7 +161,7 @@ Handler вызывает:
 
 Это видно в:
 
-- [RunOrderDemo.php](/home/disur/projects/edd-example/app/Console/Commands/RunOrderDemo.php)
+- [RunOrderDemo.php](../app/Console/Commands/RunOrderDemo.php)
 
 ### Что происходит после ConfirmOrder
 
@@ -175,11 +175,11 @@ Handler вызывает:
 
 Handler:
 
-- [RequestSpecialLogisticsHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
+- [RequestSpecialLogisticsHandler.php](../app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
 
 Store:
 
-- [DatabaseExternalServiceRequestStore.php](/home/disur/projects/edd-example/app/Infrastructure/Order/DatabaseExternalServiceRequestStore.php)
+- [DatabaseExternalServiceRequestStore.php](../app/Infrastructure/Order/DatabaseExternalServiceRequestStore.php)
 
 Таблица:
 
@@ -199,9 +199,9 @@ Store:
 
 Дальше:
 
-1. [CancelOrderHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/CancelOrderHandler.php) загружает агрегат
-2. агрегат в [Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php) выполняет `cancel()`
-3. агрегат записывает [OrderCancelled.php](/home/disur/projects/edd-example/app/Domain/Order/Events/OrderCancelled.php)
+1. [CancelOrderHandler.php](../app/Application/Order/Handlers/CancelOrderHandler.php) загружает агрегат
+2. агрегат в [Order.php](../app/Domain/Order/Order.php) выполняет `cancel()`
+3. агрегат записывает [OrderCancelled.php](../app/Domain/Order/Events/OrderCancelled.php)
 4. `EventBus` публикует событие
 5. projectors обновляют read-model
 
@@ -215,16 +215,16 @@ Store:
 
 Для понимания можно читать flow так:
 
-1. [RunOrderDemo.php](/home/disur/projects/edd-example/app/Console/Commands/RunOrderDemo.php)
-2. [CreateOrderHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/CreateOrderHandler.php) / [ConfirmOrderHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/ConfirmOrderHandler.php) / [CancelOrderHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/CancelOrderHandler.php) / [FulfillOrderHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/FulfillOrderHandler.php)
-3. [Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php)
-4. [DatabaseOrderRepository.php](/home/disur/projects/edd-example/app/Infrastructure/Order/DatabaseOrderRepository.php)
-5. [LaravelDomainEventBus.php](/home/disur/projects/edd-example/app/Infrastructure/Events/LaravelDomainEventBus.php)
-6. [DatabaseDomainEventStore.php](/home/disur/projects/edd-example/app/Infrastructure/Events/DatabaseDomainEventStore.php)
-7. [DomainEventHandlerMap.php](/home/disur/projects/edd-example/app/Infrastructure/Events/DomainEventHandlerMap.php)
-8. [OrderDetailsProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderDetailsProjector.php) и [OrderListProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderListProjector.php)
-9. [RequestSpecialLogisticsHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
-10. [DatabaseExternalServiceRequestStore.php](/home/disur/projects/edd-example/app/Infrastructure/Order/DatabaseExternalServiceRequestStore.php)
+1. [RunOrderDemo.php](../app/Console/Commands/RunOrderDemo.php)
+2. [CreateOrderHandler.php](../app/Application/Order/Handlers/CreateOrderHandler.php) / [ConfirmOrderHandler.php](../app/Application/Order/Handlers/ConfirmOrderHandler.php) / [CancelOrderHandler.php](../app/Application/Order/Handlers/CancelOrderHandler.php) / [FulfillOrderHandler.php](../app/Application/Order/Handlers/FulfillOrderHandler.php)
+3. [Order.php](../app/Domain/Order/Order.php)
+4. [DatabaseOrderRepository.php](../app/Infrastructure/Order/DatabaseOrderRepository.php)
+5. [LaravelDomainEventBus.php](../app/Infrastructure/Events/LaravelDomainEventBus.php)
+6. [DatabaseDomainEventStore.php](../app/Infrastructure/Events/DatabaseDomainEventStore.php)
+7. [DomainEventHandlerMap.php](../app/Infrastructure/Events/DomainEventHandlerMap.php)
+8. [OrderDetailsProjector.php](../app/Projections/Order/OrderDetailsProjector.php) и [OrderListProjector.php](../app/Projections/Order/OrderListProjector.php)
+9. [RequestSpecialLogisticsHandler.php](../app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
+10. [DatabaseExternalServiceRequestStore.php](../app/Infrastructure/Order/DatabaseExternalServiceRequestStore.php)
 
 ## Что показывать ученикам в базе
 

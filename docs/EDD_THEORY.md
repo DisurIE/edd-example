@@ -25,10 +25,10 @@
 
 Примеры из проекта:
 
-- [CreateOrder.php](/home/disur/projects/edd-example/app/Application/Order/Commands/CreateOrder.php)
-- [ConfirmOrder.php](/home/disur/projects/edd-example/app/Application/Order/Commands/ConfirmOrder.php)
-- [CancelOrder.php](/home/disur/projects/edd-example/app/Application/Order/Commands/CancelOrder.php)
-- [FulfillOrder.php](/home/disur/projects/edd-example/app/Application/Order/Commands/FulfillOrder.php)
+- [CreateOrder.php](../app/Application/Order/Commands/CreateOrder.php)
+- [ConfirmOrder.php](../app/Application/Order/Commands/ConfirmOrder.php)
+- [CancelOrder.php](../app/Application/Order/Commands/CancelOrder.php)
+- [FulfillOrder.php](../app/Application/Order/Commands/FulfillOrder.php)
 
 Пример:
 
@@ -41,7 +41,7 @@
 Агрегат отвечает на вопрос:
 "Можно ли это сделать по правилам бизнеса?"
 
-В проекте это [Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php).
+В проекте это [Order.php](../app/Domain/Order/Order.php).
 
 Именно здесь лежат инварианты:
 
@@ -62,10 +62,10 @@
 
 Примеры:
 
-- [OrderCreated.php](/home/disur/projects/edd-example/app/Domain/Order/Events/OrderCreated.php)
-- [OrderConfirmed.php](/home/disur/projects/edd-example/app/Domain/Order/Events/OrderConfirmed.php)
-- [OrderCancelled.php](/home/disur/projects/edd-example/app/Domain/Order/Events/OrderCancelled.php)
-- [OrderFulfilled.php](/home/disur/projects/edd-example/app/Domain/Order/Events/OrderFulfilled.php)
+- [OrderCreated.php](../app/Domain/Order/Events/OrderCreated.php)
+- [OrderConfirmed.php](../app/Domain/Order/Events/OrderConfirmed.php)
+- [OrderCancelled.php](../app/Domain/Order/Events/OrderCancelled.php)
+- [OrderFulfilled.php](../app/Domain/Order/Events/OrderFulfilled.php)
 
 Разница между командой и событием:
 
@@ -86,12 +86,12 @@
 
 Проекторы:
 
-- [OrderDetailsProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderDetailsProjector.php)
-- [OrderListProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderListProjector.php)
+- [OrderDetailsProjector.php](../app/Projections/Order/OrderDetailsProjector.php)
+- [OrderListProjector.php](../app/Projections/Order/OrderListProjector.php)
 
 Интеграционный handler:
 
-- [RequestSpecialLogisticsHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
+- [RequestSpecialLogisticsHandler.php](../app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php)
 
 ## Почему события могут обрабатываться по-разному
 
@@ -106,7 +106,7 @@
 - обычный заказ `standard` просто обновляет read-model;
 - тяжелый заказ `heavy` с `requiresLoaders=true` дополнительно создает запись во внешний логистический сервис.
 
-Это реализовано в [RequestSpecialLogisticsHandler.php](/home/disur/projects/edd-example/app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php).
+Это реализовано в [RequestSpecialLogisticsHandler.php](../app/Application/Order/Handlers/RequestSpecialLogisticsHandler.php).
 
 Там логика такая:
 
@@ -134,7 +134,7 @@
 
 В этом проекте правильное разделение такое:
 
-- агрегат [Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php) решает, можно ли менять состояние;
+- агрегат [Order.php](../app/Domain/Order/Order.php) решает, можно ли менять состояние;
 - события только фиксируют уже случившийся факт;
 - обработчики событий лишь реагируют на факт.
 
@@ -146,10 +146,10 @@
 
 В проекте write-side:
 
-- команды в [app/Application/Order/Commands](/home/disur/projects/edd-example/app/Application/Order/Commands)
-- handlers в [app/Application/Order/Handlers](/home/disur/projects/edd-example/app/Application/Order/Handlers)
-- агрегат [Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php)
-- репозиторий [DatabaseOrderRepository.php](/home/disur/projects/edd-example/app/Infrastructure/Order/DatabaseOrderRepository.php)
+- команды в [app/Application/Order/Commands](../app/Application/Order/Commands)
+- handlers в [app/Application/Order/Handlers](../app/Application/Order/Handlers)
+- агрегат [Order.php](../app/Domain/Order/Order.php)
+- репозиторий [DatabaseOrderRepository.php](../app/Infrastructure/Order/DatabaseOrderRepository.php)
 
 ### Read-side
 
@@ -157,9 +157,9 @@
 
 В проекте read-side:
 
-- [OrderDetailsProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderDetailsProjector.php)
-- [OrderListProjector.php](/home/disur/projects/edd-example/app/Projections/Order/OrderListProjector.php)
-- [DatabaseOrderViewStore.php](/home/disur/projects/edd-example/app/Infrastructure/Projections/DatabaseOrderViewStore.php)
+- [OrderDetailsProjector.php](../app/Projections/Order/OrderDetailsProjector.php)
+- [OrderListProjector.php](../app/Projections/Order/OrderListProjector.php)
+- [DatabaseOrderViewStore.php](../app/Infrastructure/Projections/DatabaseOrderViewStore.php)
 
 Таблицы:
 
@@ -170,7 +170,7 @@
 
 В проекте доменные события дополнительно пишутся в таблицу `domain_events`.
 
-Это делает [DatabaseDomainEventStore.php](/home/disur/projects/edd-example/app/Infrastructure/Events/DatabaseDomainEventStore.php).
+Это делает [DatabaseDomainEventStore.php](../app/Infrastructure/Events/DatabaseDomainEventStore.php).
 
 Это полезно для демонстрации, потому что можно показать:
 
@@ -182,7 +182,7 @@
 
 Чтобы архитектура не была "магической", обработчики событий зарегистрированы явно в:
 
-- [DomainEventHandlerMap.php](/home/disur/projects/edd-example/app/Infrastructure/Events/DomainEventHandlerMap.php)
+- [DomainEventHandlerMap.php](../app/Infrastructure/Events/DomainEventHandlerMap.php)
 
 Это важная учебная точка:
 

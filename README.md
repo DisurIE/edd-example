@@ -8,9 +8,9 @@
 
 Подробные документы вынесены отдельно:
 
-- архитектура проекта: [docs/ARCHITECTURE.md](/home/disur/projects/edd-example/docs/ARCHITECTURE.md)
-- теория EDD на примерах из кода: [docs/EDD_THEORY.md](/home/disur/projects/edd-example/docs/EDD_THEORY.md)
-- полный pipeline нашего demo-flow: [docs/EXAMPLE_PIPELINE.md](/home/disur/projects/edd-example/docs/EXAMPLE_PIPELINE.md)
+- архитектура проекта: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- теория EDD на примерах из кода: [docs/EDD_THEORY.md](docs/EDD_THEORY.md)
+- полный pipeline нашего demo-flow: [docs/EXAMPLE_PIPELINE.md](docs/EXAMPLE_PIPELINE.md)
 
 ## Что показывает пример
 
@@ -139,12 +139,12 @@ php artisan demo:order-flow
 
 ## Где смотреть код
 
-- агрегат: [app/Domain/Order/Order.php](/home/disur/projects/edd-example/app/Domain/Order/Order.php)
-- события: [app/Domain/Order/Events](/home/disur/projects/edd-example/app/Domain/Order/Events)
-- handlers: [app/Application/Order/Handlers](/home/disur/projects/edd-example/app/Application/Order/Handlers)
-- event bus: [app/Infrastructure/Events/LaravelDomainEventBus.php](/home/disur/projects/edd-example/app/Infrastructure/Events/LaravelDomainEventBus.php)
-- projectors: [app/Projections/Order](/home/disur/projects/edd-example/app/Projections/Order)
-- демо-команда: [app/Console/Commands/RunOrderDemo.php](/home/disur/projects/edd-example/app/Console/Commands/RunOrderDemo.php)
+- агрегат: [app/Domain/Order/Order.php](app/Domain/Order/Order.php)
+- события: [app/Domain/Order/Events](app/Domain/Order/Events)
+- handlers: [app/Application/Order/Handlers](app/Application/Order/Handlers)
+- event bus: [app/Infrastructure/Events/LaravelDomainEventBus.php](app/Infrastructure/Events/LaravelDomainEventBus.php)
+- projectors: [app/Projections/Order](app/Projections/Order)
+- демо-команда: [app/Console/Commands/RunOrderDemo.php](app/Console/Commands/RunOrderDemo.php)
 
 ## Ограничения примера
 
